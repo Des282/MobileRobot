@@ -85,12 +85,26 @@ float getdistance(int trig_pin, int echo_pin, char D) {
   return distance;
 }
 
-float direction_value(){
+float check_direction_value(){
       //ultrasonic code
       //--- 1. READ SENSOR ---
     L_distance = getdistance(trig_pin2, echo_pin2, 'L');
     R_distance = getdistance(trig_pin1, echo_pin1, 'R');
-    return L_distance-R_distance;    
+    if(L_distance < 20 && R_distance < 20){
+      //reverse
+      
+    }
+    else if(L_distance >= 20 && R_distance < 20){
+      //reverse then turn left    
+      
+    }
+    else if(L_distance < 20 && R_distance >= 20){
+      //reverse then turn right
+    }
+    else{
+        runMotorsL = true; // run
+        runMotorsR = true;
+    }
 }
 
 int btConnect()  {
