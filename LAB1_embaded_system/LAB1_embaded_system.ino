@@ -5,7 +5,8 @@ const int sensor = 2;  //DHT 11 SENSOR CONNECT TO PIN 6
 const int relay = 7;   //RELAY CONNECT TO PIN 7
 DHT11 dht11(sensor);
 float light_Val = 0.0;
-int temp = 0, humidity = 0, condition = 0;
+float temp = 0, humidity = 0;
+int condition = 0;
 String command;
 
 volatile bool printnow = false;
@@ -60,7 +61,9 @@ void loop() {
       break;
   }
   if (printnow) {
-    int result = dht11.readTemperatureHumidity(temp, humidity);
+    int temp1 = int(temp);
+    int humidity1 = int(humidity);
+    int result = dht11.readTemperatureHumidity(temp1, humidity1);
     if (result == 0) {
       light_Val = analogRead(LDR);
       Serial.print("Light Intensity: ");
